@@ -1,12 +1,12 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyCbIFrY0O27V9sBXLDIujJKAXkutcgEkUM",
-  authDomain: "imagesharing-c5f9c.firebaseapp.com",
-  databaseURL: "https://imagesharing-c5f9c.firebaseio.com",
-  projectId: "imagesharing-c5f9c",
-  storageBucket: "imagesharing-c5f9c.appspot.com",
-  messagingSenderId: "942319732947",
-  appId: "1:942319732947:web:03ab8fa5544336e5cfec26"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
