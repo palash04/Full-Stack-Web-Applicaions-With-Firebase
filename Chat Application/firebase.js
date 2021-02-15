@@ -89,24 +89,40 @@ db.collection('messages')
   })
 })
 
-// make an event listener
-document.querySelector('#clear').addEventListener('click', () => {
+// Delete all documents at once
+document.querySelector('#clear').addEventListener('click', ()=>{
   db.collection('messages')
   .get()
   .then(snapshot => {
     snapshot.forEach(doc => {
       db.collection('messages').doc(doc.id).delete()
       .then(() => {
-        console.log('Document successfully deleted.')
+        console.log('Document successfully deleted');
       })
-      .catch(error => {
-        console.log('Error removing document: ${error')
+      .catch((error) => {
+        console.error('Error deleting document', error);
       })
     })
   })
   .catch(error => {
-    console.log('Error getting documents: ${error}')
-  })
+    console.log('Error getting document: ', error)
+  });
 })
 
 
+// Delete one particular document
+function deleteid(elem) {
+  var id = $(elem).attr("id");
+
+  console.log(id);
+
+  db.collection('messages').doc(id)
+  .delete()
+  .then(() => {
+    console.log('Document successfully deleted',id);
+  })
+  .catch((error) => {
+    console.error('Error deleting document', error);
+  })
+
+}
