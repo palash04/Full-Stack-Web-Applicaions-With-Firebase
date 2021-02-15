@@ -82,8 +82,11 @@ db.collection('messages')
   snapshot.forEach(doc => {
     let message = document.createElement('div')
     message.innerHTML = `
-    <p class="name">${doc.data().name}</p>
-    <p>${doc.data().message}</p>
+    <div">
+        <p class="name">${doc.data().name}</p>
+        <p>${doc.data().message}</p>
+        <button id="${doc.id}" onclick="deleteid(this)">Delete</button>
+    </div>
     `
     document.querySelector('#messages').prepend(message)
   })
