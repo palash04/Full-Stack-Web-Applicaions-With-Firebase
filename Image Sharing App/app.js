@@ -69,12 +69,14 @@ uploadButton.addEventListener('change', (event) => {
 firebase.firestore().collection('images').onSnapshot(snapshot => {
   document.querySelector('#images').innerHTML = ""
   snapshot.forEach(each => {
-    console.log(each.data().url);
-    let div = document.createElement('div')
-    let image = document.createElement('img')
-    image.setAttribute('src', each.data().url)
-    div.append(image)
-    document.querySelector('#images').append(div)
+    let url = doc.data().url;
+    let id = doc.id;
+    let photo = document.createElement('div')
+    photo.innerHTML = `
+      <img src="${url}"/>
+      <button id="${id}" onclick="deleteid(this)">Remove</button>
+    `
+    document.querySelector('#images').append(photo)
   })
 })
 
@@ -103,12 +105,27 @@ document.querySelector('#clear').addEventListener('click', ()=> {
   });
 });
 
+// Delete one particular document
+function deleteid(elem) {
+  let id = $(elem).attr("id");
+  console.log(id);
+  
+  // Grab the data stored in firestore under this id
+  // let docRef1 = firebase.firestore().collection('images').doc(id);
+  // docRef1.get().then(doc =>  {
+  //   let url = doc.data().url;
+  //   console.log(url);
+  // }).catch(error => {
+  //   console.log(error);
+  // });
 
-
-
-
-
-
-
-
+  firebase.firestore().collection('images').doc(id)
+    .delete()
+    .then(() => {
+      console.log('Image successfully deleted',id);
+    })
+    .catch((error) => {
+      console.error('Error deleting document', error);
+    });
+}
 
